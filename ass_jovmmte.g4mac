@@ -1,0 +1,127 @@
+########################################################
+#
+# modular_macro.g4mac
+#
+# 1. Modular input for GRAS simulations with
+#    instructions distributed among one main macro file 
+#    (this one) and several sub-macros files, executed 
+#    by the main macro
+#
+# 2. Use of aliases to drive the simulation:
+#    aliases define parameters, or define the name of 
+#    the sub-macros to be executed, therefore driving 
+#    the simulation case
+#
+########################################################
+
+# control of amount of text feedback provided by Geant4/GRAS to terminal/log file
+
+/control/verbose 2
+/run/verbose 1
+
+# definition of aliases 
+# (text variables that are reused later in the main macro or in the sub-macros).
+
+/control/alias cut             0.1     # [mm] #alias is a keyword that creates a varialble cut with a value of 0.1
+/control/alias source_radius   1500    # [mm] 
+/control/alias source_halfz    800
+/control/alias energy_unit     MeV
+/control/alias geometry_case   gras_example_ass
+/control/alias target_name     FPA
+/control/alias target_name1    FPGA
+/control/alias no_of_events    2000000000
+#/control/alias 10percent_no_of_events echo $(( {0.1}*{no_of_events} ))
+/control/alias geometry_mode geometry_gdml
+
+/control/alias source_case     ass_joviane
+
+# geometry
+# in this case: model from external file in GDML format
+
+#/gras/geometry/type gdml
+#/gdml/file geometry/geometry_{geometry_case}.gdml
+/control/execute macros/{geometry_mode}.g4mac
+#/control/execute macros/geometry_{geometry_mode}.g4mac
+
+# physics
+# in this case: pre-compiled physics list optimised for accurate EM modelling
+
+/control/execute macros/physics_fmc_opt4.g4mac
+
+# initialise geometry and physics
+
+/run/initialize
+
+# colour assignment to elements of the geometry model
+
+/control/execute macros/colours.g4mac
+#/gras/vis/util/setVolumeProperty colour light_grey   name Spacecraft_1_log
+/gras/vis/util/setVolumeProperty colour magenta      name SA1_log
+/gras/vis/util/setVolumeProperty colour magenta      name SA2_log
+/gras/vis/util/setVolumeProperty colour yellow      name LENS_log
+/gras/vis/util/setVolumeProperty colour blue      name SC_tube_log
+/gras/vis/util/setVolumeProperty colour green      name OTA_tube_log
+/gras/vis/util/setVolumeProperty colour grey      name FPGA_log
+/gras/vis/util/setVolumeProperty colour magenta     name FPA_log
+/gras/vis/util/setVolumeProperty colour white      name ELB_log
+/gras/vis/util/setVolumeProperty colour white      name PCB_log
+
+# printout to the log (terminal or file) of the lists of logical volumes and physical volumes 
+
+/gras/geometry/util/verbose 1
+/gras/geometry/util/listLogicalVolumes
+/gras/geometry/util/listPhysicalVolumes
+
+# geometry overlap test
+# macro commands for Geant4 >= 10.1
+
+/geometry/test/verbosity true
+/geometry/test/recursion_start 0
+/geometry/test/recursion_depth -1
+/geometry/test/tolerance 0 mm
+/geometry/test/resolution 10000
+/geometry/test/maximum_errors 1
+/geometry/test/run
+
+# source
+# particle species, energy, spatial and angular distribution
+
+/control/execute macros/source_{source_case}.g4mac
+
+# analysis
+# tally total ionising dose in the target volume
+
+/gras/analysis/dose/addModule doseSi
+/gras/analysis/dose/doseSi/addVolume {target_name}
+/gras/analysis/dose/doseSi/setUnit rad
+
+#/gras/analysis/dose/addModule source1
+#/gras/analysis/source/source1/initialise
+#/gras/histo/etHistoByName source1_kine 80 1E-04 1E+04 none log
+
+/gras/analysis/dose/addModule doseSi1
+/gras/analysis/dose/doseSi1/addVolume {target_name1}
+/gras/analysis/dose/doseSi1/setUnit rad
+
+# name of the GRAS analysis output file
+
+/gras/histo/fileName      data/modular_macro_{geometry_case}_{source_case}
+
+# visualization
+
+#/control/execute macros/vis.g4mac
+
+# text output of track step by step information to terminal/log
+# (useful in some cases for debugging with just a few events, but always set to 0 when running many events)
+
+/tracking/verbose 0
+
+# every N events write results to output file 
+
+/gras/event/printModulo   100000000 #{10percent_no_of_events}
+
+# launch a run: an event loop with the particle source as defined above
+
+/run/beamOn              {no_of_events}
+
+#

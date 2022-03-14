@@ -1,0 +1,24 @@
+# List physics options
+/gras/physics/list
+#
+# Select physics list
+##############
+/gras/physics/addPhysics  rmc_em_standard
+/gras/physics/addPhysics  stopping
+/adjoint_physics/SetEminForAdjointModels 1.0000e-03 MeV
+/adjoint_physics/SetEmaxForAdjointModels 1.0000e+03 MeV
+#
+/adjoint_physics/UseBremsstrahlung true
+/adjoint_physics/UseCompton true
+/adjoint_physics/UseAdjointCompton false #default
+/adjoint_physics/UseMS true
+/adjoint_physics/UsePEEffect true
+/adjoint_physics/UseAdjointPEEffect false #default
+/adjoint_physics/UseProtonIonisation  true
+/adjoint_physics/SetSplittingFactorForPrimFwdGamma  10 #default
+#
+/run/initialize
+/run/setCut  {cut} mm
+#
+/gras/physics/describe
+#

@@ -1,0 +1,119 @@
+
+
+#
+#Source definition
+#
+# =============================
+# SPENVIS particle source
+# Project: GEO10
+# title: GEO10
+# Particle: solar proton
+# =============================
+/gps/particle  proton
+/gps/ene/type Arb
+/gps/hist/type arb
+/gps/hist/point   1.000000E-01   2.831200E+13
+/gps/hist/point   1.100000E-01   2.463600E+13
+/gps/hist/point   1.200000E-01   2.143300E+13
+/gps/hist/point   1.400000E-01   1.673700E+13
+/gps/hist/point   1.600000E-01   1.339800E+13
+/gps/hist/point   1.800000E-01   1.101800E+13
+/gps/hist/point   2.000000E-01   9.253800E+12
+/gps/hist/point   2.200000E-01   7.925800E+12
+/gps/hist/point   2.500000E-01   6.438500E+12
+/gps/hist/point   2.800000E-01   5.348100E+12
+/gps/hist/point   3.200000E-01   4.287700E+12
+/gps/hist/point   3.500000E-01   3.700500E+12
+/gps/hist/point   4.000000E-01   2.981400E+12
+/gps/hist/point   4.500000E-01   2.451800E+12
+/gps/hist/point   5.000000E-01   2.059200E+12
+/gps/hist/point   5.500000E-01   1.764600E+12
+/gps/hist/point   6.300000E-01   1.415900E+12
+/gps/hist/point   7.100000E-01   1.162100E+12
+/gps/hist/point   8.000000E-01   9.554000E+11
+/gps/hist/point   9.000000E-01   7.866800E+11
+/gps/hist/point   1.000000E+00   6.607200E+11
+/gps/hist/point   1.100000E+00   5.643900E+11
+/gps/hist/point   1.200000E+00   4.910000E+11
+/gps/hist/point   1.400000E+00   3.834200E+11
+/gps/hist/point   1.600000E+00   3.069300E+11
+/gps/hist/point   1.800000E+00   2.524100E+11
+/gps/hist/point   2.000000E+00   2.120000E+11
+/gps/hist/point   2.200000E+00   1.815700E+11
+/gps/hist/point   2.500000E+00   1.475000E+11
+/gps/hist/point   2.800000E+00   1.253700E+11
+/gps/hist/point   3.200000E+00   1.073800E+11
+/gps/hist/point   3.500000E+00   9.482700E+10
+/gps/hist/point   4.000000E+00   7.555900E+10
+/gps/hist/point   4.500000E+00   6.150700E+10
+/gps/hist/point   5.000000E+00   5.388700E+10
+/gps/hist/point   5.500000E+00   4.837200E+10
+/gps/hist/point   6.300000E+00   3.815600E+10
+/gps/hist/point   7.100000E+00   3.209300E+10
+/gps/hist/point   8.000000E+00   2.707400E+10
+/gps/hist/point   9.000000E+00   2.160100E+10
+/gps/hist/point   1.000000E+01   1.877500E+10
+/gps/hist/point   1.100000E+01   1.668800E+10
+/gps/hist/point   1.200000E+01   1.404000E+10
+/gps/hist/point   1.400000E+01   1.061800E+10
+/gps/hist/point   1.600000E+01   8.536300E+09
+/gps/hist/point   1.800000E+01   6.842100E+09
+/gps/hist/point   2.000000E+01   5.645900E+09
+/gps/hist/point   2.200000E+01   4.802100E+09
+/gps/hist/point   2.500000E+01   3.707300E+09
+/gps/hist/point   2.800000E+01   2.994700E+09
+/gps/hist/point   3.200000E+01   2.228300E+09
+/gps/hist/point   3.500000E+01   1.833900E+09
+/gps/hist/point   4.000000E+01   1.380300E+09
+/gps/hist/point   4.500000E+01   1.050000E+09
+/gps/hist/point   5.000000E+01   8.140900E+08
+/gps/hist/point   5.500000E+01   6.492800E+08
+/gps/hist/point   6.300000E+01   4.621100E+08
+/gps/hist/point   7.100000E+01   3.350600E+08
+/gps/hist/point   8.000000E+01   2.435300E+08
+/gps/hist/point   9.000000E+01   1.749300E+08
+/gps/hist/point   1.000000E+02   1.277100E+08
+/gps/hist/point   1.100000E+02   9.422900E+07
+/gps/hist/point   1.200000E+02   7.222500E+07
+/gps/hist/point   1.400000E+02   4.574200E+07
+/gps/hist/point   1.600000E+02   2.938400E+07
+/gps/hist/point   1.800000E+02   1.973300E+07
+/gps/hist/point   2.000000E+02   1.383000E+07
+/gps/hist/point   2.200000E+02   1.009400E+07
+/gps/hist/point   2.500000E+02   6.597300E+06
+/gps/hist/point   2.800000E+02   4.485100E+06
+/gps/hist/point   3.200000E+02   2.701600E+06
+/gps/hist/point   3.500000E+02   1.922300E+06
+/gps/hist/point   4.000000E+02   1.178000E+06
+/gps/hist/point   4.500000E+02   7.485500E+05
+/gps/hist/point   5.000000E+02   4.380800E+05
+/gps/hist/inter  Lin
+/gps/ang/type cos
+/gps/ang/mintheta    0.000E+00 deg
+/gps/ang/maxtheta    9.000E+01 deg
+/gps/source/list 
+
+#
+#Normalisation
+#
+/control/alias  NORM_FACTOR_SPECTRUM "   4.539112E+12 "
+/control/alias  NORM_FACTOR_ANGULAR "   2.500000E-01 "
+#
+# NOTE:
+#
+# The section below should be copied to all Forward MC (FMC) macros
+# created in SPENVIS
+#
+# They include 
+# - the definition of the FMC source location
+# - the GRAS normalisation, using the SPENVIS alias as defined here above
+#
+
+/gps/pos/type Surface
+/gps/pos/shape Cylinder
+/gps/pos/radius {source_radius} mm
+/gps/pos/halfz  {source_halfz} mm
+#
+/gras/analysis/setNormalisationType FLUENCE
+/gras/analysis/setSourceFluence {NORM_FACTOR_SPECTRUM} cm-2
+#

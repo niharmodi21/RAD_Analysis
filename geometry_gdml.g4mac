@@ -1,0 +1,5 @@
+/gras/geometry/type gdml
+
+/gdml/file geometry/geometry_{geometry_case}.gdml
+#/gdml/setup World
+#

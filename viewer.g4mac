@@ -1,0 +1,114 @@
+/control/verbose 2
+/run/verbose 1
+
+# geometry
+/gras/geometry/type gdml
+/gdml/file geometry/geometry_gras_example_view.gdml
+/gdml/setup World
+#
+
+# physics
+/gras/physics/addPhysics  em_standard_opt3
+#
+/run/initialize
+#
+/gras/vis/util/addColour light_grey   0.85 0.85 0.85
+/gras/vis/util/addColour magenta      1    0    1
+/gras/vis/util/setVolumeProperty colour light_grey   name Spacecraft_1_log
+/gras/vis/util/setVolumeProperty colour magenta      name Target_000_log
+
+/gras/geometry/util/verbose 1
+/gras/geometry/util/listLogicalVolumes
+/gras/geometry/util/listPhysicalVolumes
+
+/geometry/test/run
+
+
+#setting up the source
+#
+/gps/particle e-
+#
+/gps/ene/type Mono
+/gps/ene/mono 1. MeV
+#
+/gps/pos/type Surface
+/gps/pos/shape Sphere
+/gps/pos/centre 0 0 0 mm
+# box is 120x120x320mm3, corners are at 181.1 mm
+/gps/pos/radius 200 mm
+#
+/gps/ang/type cos
+/gps/ang/mintheta  0  deg
+/gps/ang/maxtheta 90  deg
+#
+
+/gras/analysis/autoSeed true
+/gras/analysis/seedsInFileName false
+
+/gras/histo/fileName      data/viewer
+
+/gras/analysis/dose/addModule doseSi
+/gras/analysis/dose/doseSi/addVolume Target_000
+/gras/analysis/dose/doseSi/tallyIndividualVolumes false
+/gras/analysis/dose/doseSi/bookHistos true
+/gras/analysis/dose/doseSi/bookTuples false
+/gras/analysis/dose/doseSi/setUnit rad
+/gras/analysis/dose/doseSi/initialise
+/gras/histo/setHistoByName doseSi_dose                        80 1E-11 1E-03 none log
+/gras/histo/setHistoByName doseSi_total_dose_vs_primary_kine  80 1E-04 1E+04 none log
+
+
+# SOURCE analysis
+########################################
+/gras/analysis/source/addModule source1
+/gras/analysis/source/source1/bookTuples true
+/gras/analysis/source/source1/initialise
+/gras/histo/setHistoByName source1_kine  80 1E-04 1E+04 none log
+
+
+/gras/analysis/describe 2
+/gras/analysis/initialise
+/gras/histo/list
+
+/vis/open ATree
+/vis/ASCIITree/verbose 14
+/vis/scene/create
+/vis/scene/add/volume World
+/vis/sceneHandler/attach
+/vis/viewer/flush
+
+# VISUALIZATION
+#
+# create empty scene
+/vis/scene/create
+/vis/open OGL
+/vis/ogl/set/displayListLimit 500000
+/vis/drawVolume
+/vis/scene/add/trajectories
+/vis/viewer/flush
+# viewing style
+# w: wireframe, s: solid
+/vis/viewer/set/style w
+#
+# for drawing the tracks
+# (if too many tracks cause core dump => storeTrajectory 0)
+/tracking/storeTrajectory 1
+/vis/scene/endOfEventAction accumulate
+#/vis/scene/endOfRunAction accumulate
+
+/vis/viewer/set/auxiliaryEdge true
+/vis/viewer/set/lineSegmentsPerCircle 50
+
+/vis/viewer/set/viewpointThetaPhi 0 0 deg
+#/vis/scene/add/axes
+
+/vis/viewer/zoomTo 1
+
+# track step by step information to terminal/log
+/tracking/verbose 0
+
+########run command #######
+/gras/event/printModulo  10000
+#/run/beamOn              100
+
+

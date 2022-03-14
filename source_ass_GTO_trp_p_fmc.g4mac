@@ -1,0 +1,78 @@
+
+#
+#Source definition
+#
+# =============================
+# SPENVIS particle source
+# Project: GTO
+# title: Assignment_GTO
+# Particle: proton
+# Mission Segment:   1   365.0 Days
+# =============================
+/gps/particle  proton
+/gps/ene/type Arb
+/gps/hist/type arb
+/gps/particle  proton
+/gps/ene/type Arb
+/gps/hist/type arb
+/gps/hist/point   1.000000E-01   2.482300E+08
+/gps/hist/point   1.500000E-01   1.875900E+08
+/gps/hist/point   2.000000E-01   1.364300E+08
+/gps/hist/point   3.000000E-01   7.801500E+07
+/gps/hist/point   4.000000E-01   5.014100E+07
+/gps/hist/point   5.000000E-01   3.316000E+07
+/gps/hist/point   6.000000E-01   2.309300E+07
+/gps/hist/point   7.000000E-01   1.682300E+07
+/gps/hist/point   1.000000E+00   8.162800E+06
+/gps/hist/point   1.500000E+00   2.607500E+06
+/gps/hist/point   2.000000E+00   9.884400E+05
+/gps/hist/point   3.000000E+00   2.175500E+05
+/gps/hist/point   4.000000E+00   7.631000E+04
+/gps/hist/point   5.000000E+00   3.274100E+04
+/gps/hist/point   6.000000E+00   1.849100E+04
+/gps/hist/point   7.000000E+00   1.145300E+04
+/gps/hist/point   1.000000E+01   4.504000E+03
+/gps/hist/point   1.500000E+01   1.058400E+03
+/gps/hist/point   2.000000E+01   3.063600E+02
+/gps/hist/point   3.000000E+01   6.471900E+01
+/gps/hist/point   4.000000E+01   2.228300E+01
+/gps/hist/point   5.000000E+01   1.395900E+01
+/gps/hist/point   6.000000E+01   8.369200E+00
+/gps/hist/point   7.000000E+01   6.676700E+00
+/gps/hist/point   1.000000E+02   4.345300E+00
+/gps/hist/point   1.500000E+02   2.275400E+00
+/gps/hist/point   2.000000E+02   1.288000E+00
+/gps/hist/point   3.000000E+02   4.429100E-01
+/gps/hist/point   4.000000E+02   2.977400E-02
+/gps/hist/inter  Lin
+/gps/ang/type cos
+/gps/ang/mintheta    0.000E+00 deg
+/gps/ang/maxtheta    9.000E+01 deg
+/gps/source/list 
+
+#
+#Normalisation
+#
+/control/alias  NORM_FACTOR_SPECTRUM "   1.553148E+15 "
+/control/alias  NORM_FACTOR_ANGULAR "   2.500000E-01 "
+
+#
+# NOTE:
+#
+# The section below should be copied to all Forward MC (FMC) macros
+# created in SPENVIS
+#
+# They include 
+# - the definition of the FMC source location
+# - the GRAS normalisation, using the SPENVIS alias as defined here above
+#
+
+/gps/pos/type Surface
+/gps/pos/shape Cylinder
+/gps/pos/radius {source_radius} mm
+/gps/pos/halfz  {source_halfz} mm
+#
+/gras/analysis/setNormalisationType FLUENCE
+/gras/analysis/setSourceFluence {NORM_FACTOR_SPECTRUM} cm-2
+#
+

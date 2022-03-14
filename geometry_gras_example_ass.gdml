@@ -1,0 +1,512 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<gdml xmlns:gdml="http://cern.ch/2001/Schemas/GDML" 
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="../GDMLSchema/gdml.xsd">
+
+
+<define>
+  <constant name="HALFPI" value="pi/2."/>
+  <constant name="PI" value="1.*pi"/>
+  <constant name="TWOPI" value="2.*pi"/>
+
+  <quantity name="World_X"     type="length" value="10." unit="m"/>
+  <quantity name="World_Y"     type="length" value="10." unit="m"/>
+  <quantity name="World_Z"     type="length" value="10." unit="m"/>
+
+<!--*******************************************-->
+<!--******* 1. Definition of Dimensions *******-->
+<!--*******************************************-->
+
+<!-- Spacecraft tube-->
+
+  <quantity name = "SC_out_tube_rad"  type="length" value="300" unit="mm"/>
+  <quantity name = "SC_out_tube_length"  type="length" value="720" unit="mm"/>
+ 
+  <quantity name = "SC_wall_thickness"  type="length" value="0.4" unit="mm"/>
+  <expression name="SC_in_tube_rad"> SC_out_tube_rad - SC_wall_thickness </expression>
+  <expression name="SC_in_tube_length"> SC_out_tube_length - SC_wall_thickness - SC_wall_thickness </expression>
+
+  <quantity name = "SC_annulus_tube_rad"  type="length" value="230.250001" unit="mm"/> <!-- Introduced uncertainty to prevent overlap -->
+  <quantity name = "SC_annulus_tube_length"  type="length" value="0.5" unit="mm"/> <!-- EXTRA 0.1 -->
+  
+  <quantity name="SC_annulus_tube_X"           type="length"  value="0"     unit="mm"/>
+  <quantity name="SC_annulus_tube_Y"           type="length"  value="0"     unit="mm"/>
+  <quantity name="SC_annulus_tube_Z"           type="length"  value="359.8"     unit="mm"/>
+
+  <position name="SC_annulus_Tube_Cut_Pos" x="SC_annulus_tube_X" y="SC_annulus_tube_Y" z="SC_annulus_tube_Z" />
+
+<!-- ****** -->
+
+<!-- OTA tube-->
+
+  <quantity name = "OTA_in_tube_rad"  type="length" value="230" unit="mm"/>
+  <quantity name = "OTA_in_tube_length"  type="length" value="600" unit="mm"/>
+ 
+  <quantity name = "OTA_wall_thickness"  type="length" value="0.25" unit="mm"/>
+  <expression name="OTA_out_tube_rad"> OTA_in_tube_rad + OTA_wall_thickness </expression>
+  <expression name="OTA_out_tube_length"> OTA_in_tube_length + OTA_wall_thickness </expression>
+  
+  <quantity name="OTA_Outer_tube_X"           type="length"  value="0"     unit="mm"/>
+  <quantity name="OTA_Outer_tube_Y"           type="length"  value="0"     unit="mm"/>
+  <quantity name="OTA_Outer_tube_Z"           type="length"  value="249.875"     unit="mm"/>
+
+  <position name="OTA_Outer_Tube_Pos" x="OTA_Outer_tube_X" y="OTA_Outer_tube_Y" z="OTA_Outer_tube_Z" />
+
+  <quantity name="OTA_Inner_tube_X"           type="length"  value="0"     unit="mm"/>
+  <quantity name="OTA_Inner_tube_Y"           type="length"  value="0"     unit="mm"/>
+  <quantity name="OTA_Inner_tube_Z"           type="length"  value="0.125"     unit="mm"/> <!-- w.r.t outer tube-->
+
+  <position name="OTA_Inner_Tube_Cut_Pos" x="OTA_Inner_tube_X" y="OTA_Inner_tube_Y" z="OTA_Inner_tube_Z" />
+
+<!-- ****** -->
+<!-- FPA -->
+
+  <quantity name = "FPA_Box_X"            type="length"  value="40"    unit="mm"/>
+  <quantity name = "FPA_Box_Y"            type="length"  value="40"    unit="mm"/>
+  <quantity name = "FPA_Box_Z"            type="length"  value="0.1"    unit="mm"/>
+  <quantity name = "FPA_Box_Zhalf"        type="length"  value="0.05"    unit="mm"/>
+
+  <quantity name="FPA_Pos_X"           type="length"  value="0"     unit="mm"/>
+  <quantity name="FPA_Pos_Y"           type="length"  value="0"     unit="mm"/>
+  <quantity name="FPA_Pos_Z"           type="length"  value="-0.2"     unit="mm"/>
+
+  <position name="FPA_Pos" x="FPA_Pos_X" y="FPA_Pos_Y" z="FPA_Pos_Z" />
+
+<!-- ****** -->
+
+<!-- Cone shield -->
+  <quantity name = "z"                type="length"  value="540"    unit="mm"/>
+  <quantity name = "rmin2"            type="length"  value="225"    unit="mm"/>
+  <quantity name = "rmax2"            type="length"  value="227.8"    unit="mm"/>
+  <quantity name = "rmin1"            type="length"  value="30"    unit="mm"/>
+  <quantity name = "rmax1"            type="length"  value="32.8"    unit="mm"/>
+  <quantity name = "startphi"         type="length"  value="0"    unit="mm"/>
+  <quantity name = "deltaphi"         type="length"  value="TWOPI"    unit="mm"/>
+
+
+  <quantity name="FPACS_Pos_X"           type="length"  value="0"     unit="mm"/>
+  <quantity name="FPACS_Pos_Y"           type="length"  value="0"     unit="mm"/>
+  <quantity name="FPACS_Pos_Z"           type="length"  value="270"     unit="mm"/>
+
+  <position name="FPACS_Pos" x="FPACS_Pos_X" y="FPACS_Pos_Y" z="FPACS_Pos_Z" />
+
+<!-- FPA Shield layers -->
+
+  <quantity name = "layer_UF"            type="length"  value="0.00001"    unit="mm"/>
+
+  <quantity name = "FPA_S1_R"            type="length"  value="32.8"    unit="mm"/>
+  <quantity name = "FPA_S1_Z"            type="length"  value="2.8"    unit="mm"/>
+  <quantity name = "FPA_S1_Zhalf"            type="length"  value="1.4"    unit="mm"/>
+
+  <quantity name="FPAS1_Pos_X"           type="length"  value="0"     unit="mm"/>
+  <quantity name="FPAS1_Pos_Y"           type="length"  value="0"     unit="mm"/>
+  <expression name="FPAS1_Pos_Z"> FPA_Pos_Z - FPA_Box_Zhalf - FPA_S1_Zhalf - layer_UF </expression>
+ 
+  <position name="FPAS1_Pos" x="FPAS1_Pos_X" y="FPAS1_Pos_Y" z="FPAS1_Pos_Z" />
+
+<!-- ****** -->
+
+<!-- LENS (Cut Ellipsoid GDML Manual P.14) 230 230 20-->
+
+  <quantity name = "LENS_AX"            type="length"  value="230"    unit="mm"/>
+  <quantity name = "LENS_AY"            type="length"  value="230"    unit="mm"/>
+  <quantity name = "LENS_AZ"            type="length"  value="10"    unit="mm"/>
+
+  <quantity name="LENS_Pos_X"           type="length"  value="0"     unit="mm"/>
+  <quantity name="LENS_Pos_Y"           type="length"  value="0"     unit="mm"/>
+  <quantity name="LENS_Pos_Z"           type="length"  value="550"     unit="mm"/>
+
+  <position name="LENS_Pos" x="LENS_Pos_X" y="LENS_Pos_Y" z="LENS_Pos_Z" />
+
+<!-- ****** -->
+
+<!-- Solar Array (SA) 1&2 -->
+
+  <quantity name = "SA1_Box_X"            type="length"  value="1000"    unit="mm"/>
+  <quantity name = "SA1_Box_Y"            type="length"  value="400"    unit="mm"/>
+  <quantity name = "SA1_Box_Z"            type="length"  value="4"    unit="mm"/>
+
+  <quantity name = "SA2_Box_X"            type="length"  value="1000"    unit="mm"/>
+  <quantity name = "SA2_Box_Y"            type="length"  value="400"    unit="mm"/>
+  <quantity name = "SA2_Box_Z"            type="length"  value="4"    unit="mm"/>
+
+  <quantity name="SA_1_Pos_X"           type="length"  value="800.0001"     unit="mm"/>
+  <quantity name="SA_1_Pos_Y"           type="length"  value="0"     unit="mm"/>
+  <quantity name="SA_1_Pos_Z"           type="length"  value="70"     unit="mm"/>
+
+  <quantity name="SA_2_Pos_X"           type="length"  value="-800.0001"     unit="mm"/>
+  <quantity name="SA_2_Pos_Y"           type="length"  value="0"     unit="mm"/>
+  <quantity name="SA_2_Pos_Z"           type="length"  value="70"     unit="mm"/>
+
+  <position name="SA_1_Pos" x="SA_1_Pos_X" y="SA_1_Pos_Y" z="SA_1_Pos_Z" />
+  <position name="SA_2_Pos" x="SA_2_Pos_X" y="SA_2_Pos_Y" z="SA_2_Pos_Z" />
+  <rotation name="rot_solararray"  x = "90" unit="deg"/>
+
+<!-- ****** -->
+
+<!-- ELB -->
+
+  <quantity name = "ELB_out_Box_X"            type="length"  value="100"    unit="mm"/>
+  <quantity name = "ELB_out_Box_Y"            type="length"  value="100"    unit="mm"/>
+  <quantity name = "ELB_out_Box_Z"            type="length"  value="100"    unit="mm"/>
+
+  <quantity name = "ELB_in_Box_X"            type="length"  value="99.5"    unit="mm"/>
+  <quantity name = "ELB_in_Box_Y"            type="length"  value="99.5"    unit="mm"/>
+  <quantity name = "ELB_in_Box_Z"            type="length"  value="99.5"    unit="mm"/>
+
+  <quantity name="ELB_Pos_X"           type="length"  value="245.3"     unit="mm"/>
+  <quantity name="ELB_Pos_Y"           type="length"  value="0"     unit="mm"/>
+  <quantity name="ELB_Pos_Z"           type="length"  value="-214.6"     unit="mm"/>
+
+  <position name="ELB_Pos" x="ELB_Pos_X" y="ELB_Pos_Y" z="ELB_Pos_Z" />
+
+<!-- ****** -->
+
+<!-- PCB -->
+
+  <quantity name = "PCB_Box_X"            type="length"  value="99.4999"    unit="mm"/>
+  <quantity name = "PCB_Box_Y"            type="length"  value="99.4999"    unit="mm"/>
+  <quantity name = "PCB_Box_Z"            type="length"  value="1"    unit="mm"/>
+
+  <quantity name="PCB_Pos_X"           type="length"  value="245.3"     unit="mm"/>
+  <quantity name="PCB_Pos_Y"           type="length"  value="0"     unit="mm"/>
+  <quantity name="PCB_Pos_Z"           type="length"  value="-214.6"     unit="mm"/>
+
+  <position name="PCB_Pos" x="PCB_Pos_X" y="PCB_Pos_Y" z="PCB_Pos_Z" />
+  <rotation name="rot_PCB"  x = "90" unit="deg"/>
+
+<!-- ****** -->
+
+<!-- FPGA -->
+
+  <quantity name = "FPGA_Box_X"            type="length"  value="40"    unit="mm"/>
+  <quantity name = "FPGA_Box_Y"            type="length"  value="40"    unit="mm"/>
+  <quantity name = "FPGA_Box_Z"            type="length"  value="0.1"    unit="mm"/>
+
+  <quantity name="FPGA_Pos_X"           type="length"  value="245.3"     unit="mm"/>
+  <quantity name="FPGA_Pos_Y"           type="length"  value="0.56"     unit="mm"/>
+  <quantity name="FPGA_Pos_Z"           type="length"  value="-214.6"     unit="mm"/>
+
+  <position name="FPGA_Pos" x="FPGA_Pos_X" y="FPGA_Pos_Y" z="FPGA_Pos_Z" />
+  <rotation name="rot_FPGA"  x = "90" unit="deg"/>
+
+<!-- ****** -->
+
+<!-- FPGAS1 Shield -->
+
+  <quantity name = "FPGAS1_Box_X"            type="length"  value="60"    unit="mm"/>
+  <quantity name = "FPGAS1_Box_Y"            type="length"  value="60"    unit="mm"/>
+  <quantity name = "FPGAS1_Box_Z"            type="length"  value="3"    unit="mm"/>
+
+  <quantity name="FPGAS1_Pos_X"           type="length"  value="245.3"     unit="mm"/>
+  <quantity name="FPGAS1_Pos_Y"           type="length"  value="2.111"     unit="mm"/>
+  <quantity name="FPGAS1_Pos_Z"           type="length"  value="-214.6"     unit="mm"/>
+
+  <position name="FPGAS1_Pos" x="FPGAS1_Pos_X" y="FPGAS1_Pos_Y" z="FPGAS1_Pos_Z" />
+  <rotation name="rot_FPGAS1"  x = "90" unit="deg"/>
+
+<!-- ****** -->
+<!-- FPGAS2 Shield-->
+
+  <quantity name = "FPGAS2_Box_X"            type="length"  value="60"    unit="mm"/>
+  <quantity name = "FPGAS2_Box_Y"            type="length"  value="60"    unit="mm"/>
+  <quantity name = "FPGAS2_Box_Z"            type="length"  value="3"    unit="mm"/>
+
+  <quantity name="FPGAS2_Pos_X"           type="length"  value="245.3"     unit="mm"/>
+  <quantity name="FPGAS2_Pos_Y"           type="length"  value="-2.0001"     unit="mm"/>
+  <quantity name="FPGAS2_Pos_Z"           type="length"  value="-214.6"     unit="mm"/>
+
+  <position name="FPGAS2_Pos" x="FPGAS2_Pos_X" y="FPGAS2_Pos_Y" z="FPGAS2_Pos_Z" />
+  <rotation name="rot_FPGAS2"  x = "90" unit="deg"/>
+
+<!-- ****** -->
+ <position name="pos_centre"                        />
+ <rotation name="rot_identity"                      />
+ 
+
+ </define>
+
+<!--*******************************************-->
+<!--******* 3. Definition of Materials *******-->
+<!--*******************************************-->
+
+
+ <materials>
+  <define>
+   <quantity type="density" name="universe_mean_density" value="1.e-25" unit="g/cm3"/>
+  </define>
+  <!-- Elements -->
+  <element name="ele_Hydrogen"   formula="H"  Z="1.">  <atom value="1.01"/>     </element>
+  <element name="ele_Carbon"     formula="C"  Z="6.">  <atom value="12.01"/>    </element>
+  <element name="ele_Nitrogen"   formula="N"  Z="7.">  <atom value="14.01"/>    </element>
+  <element name="ele_Oxygen"     formula="O"  Z="8.">  <atom value="16.0"/>     </element>
+  <element name="ele_Aluminium"  formula="Al" Z="13."> <atom value="26.98"/>    </element>
+  <element name="ele_Silicon"    formula="Si" Z="14."> <atom value="28.09"/>    </element>
+  <element name="ele_Fluor"      formula="F"  Z="9.">  <atom value="19."/>      </element>
+  <element name="ele_Tungsten"   formula="W"  Z="74."> <atom value="183.84"/>   </element>
+  <element name="ele_Tantalum"   formula="Ta" Z="73."> <atom value="180.9479"/> </element>
+  <element name="ele_Titanium"   formula="Ti" Z="22."> <atom value="47.867"/>   </element>
+  <element name="ele_Molybdenum" formula="Mo" Z="42."> <atom value="95.94"/>    </element>
+  <element name="ele_Iron"       formula="Fe" Z="26."> <atom value="55.845"/>   </element>
+  <element name="ele_Bromine"    formula="Br"  Z="35">   <atom value="79.904"/>   </element>
+  <element name="ele_Calcium"    formula="Ca"  Z="20">   <atom value="40.078"/>   </element>
+  <element name="ele_Magnesium"  formula="Mg"  Z="12">   <atom value="24.305"/>   </element>
+  <element name="ele_Sodium"     formula="Na"  Z="11">   <atom value="22.99"/>    </element>
+  
+  <!-- Simple materials -->
+  <material name="Pb" formula="Pb" Z="82.">
+   <D value="11.35"/> <atom value="207.19"/>
+  </material>
+  <!-- Material from elements or chemical formula -->
+  <material name="Al" formula="Al">
+   <D value="2.70"/> 
+   <composite n="1" ref="ele_Aluminium"/>
+  </material>
+
+  <material name="Water" formula="H20">
+   <D value="1.0"/> 
+   <composite n="2" ref="ele_Hydrogen"/> 
+   <composite n="1" ref="ele_Oxygen"/>
+  </material>
+  <material name="Si">
+   <D value="2.33"/>
+   <composite n="1" ref="ele_Silicon"/> 
+  </material>
+  <material name="W">
+   <D value="19.250"/>
+   <composite n="1" ref="ele_Tungsten"/> 
+  </material>
+  <material name="Ta">
+   <D value="16.650"/> 
+   <composite n="1" ref="ele_Tantalum"/> 
+  </material>
+  <material name="Ti">
+   <D value="4.507"/>
+   <composite n="1" ref="ele_Titanium"/> 
+  </material>
+  <material formula=" " name="Air_by_weight" >
+    <D value="1.290" unit="mg/cm3"/>
+    <fraction n="0.77" ref="ele_Nitrogen" />
+    <fraction n="0.23" ref="ele_Oxygen" />
+  </material>
+  <material name="Poly">
+    <D value="0.965"/>
+    <composite n="2" ref="ele_Carbon"/> 
+    <composite n="4" ref="ele_Hydrogen"/>
+  </material>
+  <!-- <material name="SiO2">
+    <D value="2.65"/>
+    <composite n="1" ref="ele_Silicon"/> 
+    <composite n="2" ref="ele_Oxygen"/>
+  </material> -->
+  <!-- Vacuum is already defined in GRAS
+  <material name="Vacuum" Z="1.">
+   <T value="2.73"/> <P value="3.0e-18" unit="pascal"/> <Dref ref="universe_mean_density"/>
+   <atom value="1.01"/>
+  </material>  -->
+
+<!-- https://github.com/tihonav/cad-to-geant4-converter/blob/master/stl_gdml.py --> 
+
+        <!-- FR4 submaterials -->
+
+        <material name="EpoxyResin" formula="C38H40O6Br4">
+            <D value="1.1250" unit="g/cm3"/>
+            <composite n="38" ref="ele_Carbon"/>
+            <composite n="40" ref="ele_Hydrogen"/>
+            <composite n="6" ref="ele_Oxygen"/>
+            <composite n="4" ref="ele_Bromine"/>
+        </material>
+        <material name="SiO2" formula="SiO2">
+            <D value="2.2" unit="g/cm3"/>
+            <composite n="1" ref="ele_Silicon"/>
+            <composite n="2" ref="ele_Oxygen"/>
+        </material>
+        <material name="Al2O3" formula="Al2O3">
+            <D value="3.97" unit="g/cm3"/>
+            <composite n="2" ref="ele_Aluminium"/>
+            <composite n="3" ref="ele_Oxygen"/>
+        </material>
+        <material name="Fe2O3" formula="Fe2O3">
+            <D value="5.24" unit="g/cm3"/>
+            <composite n="2" ref="ele_Iron"/>
+            <composite n="3" ref="ele_Oxygen"/>
+        </material>
+       <material name="CaO" formula="CaO">
+           <D value="3.35" unit="g/cm3"/>
+           <composite n="1" ref="ele_Calcium"/>
+           <composite n="1" ref="ele_Oxygen"/>
+       </material>
+       <material name="MgO" formula="MgO">
+           <D value="3.58" unit="g/cm3"/>
+           <composite n="1" ref="ele_Magnesium"/>
+           <composite n="1" ref="ele_Oxygen"/>
+       </material>
+       <material name="Na2O" formula="Na2O">
+           <D value="2.27" unit="g/cm3"/>
+           <composite n="2" ref="ele_Sodium"/>
+           <composite n="1" ref="ele_Oxygen"/>
+       </material>
+       <material name="TiO2" formula="TiO2">
+           <D value="4.23" unit="g/cm3"/>
+           <composite n="1" ref="ele_Titanium"/>
+           <composite n="2" ref="ele_Oxygen"/>
+       </material>
+       <material name="FibrousGlass">
+           <D value="2.74351" unit="g/cm3"/>
+           <fraction n="0.600" ref="SiO2"/>
+           <fraction n="0.118" ref="Al2O3"/>
+           <fraction n="0.001" ref="Fe2O3"/>
+           <fraction n="0.224" ref="CaO"/>
+           <fraction n="0.034" ref="MgO"/>
+           <fraction n="0.010" ref="Na2O"/>
+           <fraction n="0.013" ref="TiO2"/>
+       </material>
+       <material name="FR4">
+           <D value="1.98281" unit="g/cm3"/>
+           <fraction n="0.47" ref="EpoxyResin"/>
+           <fraction n="0.53" ref="FibrousGlass"/>
+       </material> 
+ </materials>
+
+<!--*******************************************-->
+<!--******* 4. Definition of Solids *******-->
+<!--*******************************************-->
+
+
+ <solids>
+  
+  <box name="World_sol"              x="World_X"   y="World_Y"    z="World_Z" />
+
+  <tube name = "SC_out_tube_sol" rmin="0" rmax="SC_out_tube_rad" z="SC_out_tube_length" deltaphi="TWOPI" startphi="0" 
+  aunit="rad" lunit= "mm"/>
+  <tube name = "SC_in_tube_sol" rmin="0" rmax="SC_in_tube_rad" z="SC_in_tube_length" deltaphi="TWOPI" startphi="0" 
+  aunit="rad" lunit= "mm"/>
+  <subtraction name="SC_tube1_sol">
+    <first ref="SC_out_tube_sol"/> <second ref="SC_in_tube_sol"/>
+    <positionref ref="pos_centre"/>
+  </subtraction> 
+  <tube name = "SC_annulus_tube_sol" rmin="0" rmax="SC_annulus_tube_rad" z="SC_annulus_tube_length" deltaphi="TWOPI" startphi="0" 
+  aunit="rad" lunit= "mm"/>
+  <subtraction name="SC_tube_sol">
+    <first ref="SC_tube1_sol"/> <second ref="SC_annulus_tube_sol"/>
+    <positionref ref="SC_annulus_Tube_Cut_Pos"/>
+  </subtraction> 
+
+
+  <tube name = "OTA_out_tube_sol" rmin="0" rmax="OTA_out_tube_rad" z="OTA_out_tube_length" deltaphi="TWOPI" startphi="0" 
+  aunit="rad" lunit= "mm"/>
+  <tube name = "OTA_in_tube_sol" rmin="0" rmax="OTA_in_tube_rad" z="OTA_in_tube_length" deltaphi="TWOPI" startphi="0" 
+  aunit="rad" lunit= "mm"/>
+  <subtraction name="OTA_tube_sol">
+    <first ref="OTA_out_tube_sol"/> <second ref="OTA_in_tube_sol"/>
+    <positionref ref="OTA_Inner_Tube_Cut_Pos"/>
+  </subtraction>
+
+  <box name= "FPA_sol" x="FPA_Box_X" y="FPA_Box_Y" z="FPA_Box_Z" />
+  <tube name= "FPAS1_sol" rmin="0" rmax="FPA_S1_R" z="FPA_S1_Z" deltaphi="TWOPI" startphi="0" aunit="rad" lunit= "mm" />
+  <cone name= "coneshield_sol" rmin1="rmin1" rmax1="rmax1" rmin2="rmin2" rmax2="rmax2" z="z" startphi="startphi" deltaphi="deltaphi" aunit="rad" lunit="mm" />
+
+  <ellipsoid name= "LENS_sol" ax="LENS_AX" by="LENS_AY" cz="LENS_AZ" lunit="mm" /> 
+
+  <box name= "SA1_sol" x="SA1_Box_X" y="SA1_Box_Y" z="SA1_Box_Z" />
+  <box name= "SA2_sol" x="SA2_Box_X" y="SA2_Box_Y" z="SA2_Box_Z" />
+  
+  <box name= "ELB_out_sol" x="ELB_out_Box_X" y="ELB_out_Box_Y" z="ELB_out_Box_Z" />
+  <box name= "ELB_in_sol" x="ELB_in_Box_X" y="ELB_in_Box_Y" z="ELB_in_Box_Z" />
+  <subtraction name="ELB_sol">
+    <first ref="ELB_out_sol"/> <second ref="ELB_in_sol"/>
+    <positionref ref="pos_centre"/>
+  </subtraction>
+  
+  <box name= "PCB_sol" x="PCB_Box_X" y="PCB_Box_Y" z="PCB_Box_Z" />
+
+  <box name= "FPGA_sol" x="FPGA_Box_X" y="FPGA_Box_Y" z="FPGA_Box_Z" />
+  <box name= "FPGAS1_sol" x="FPGAS1_Box_X" y="FPGAS1_Box_Y" z="FPGAS1_Box_Z" />
+  <box name= "FPGAS2_sol" x="FPGAS2_Box_X" y="FPGAS2_Box_Y" z="FPGAS2_Box_Z" />
+</solids>
+
+<!--*******************************************-->
+<!--******* 4. Definition of Structure  *******-->
+<!--*******************************************-->
+<structure>
+
+
+
+ <volume name="SC_tube_log">
+   <materialref ref="Al"/> <solidref ref="SC_tube_sol"/>
+ </volume>
+
+ <volume name="OTA_tube_log">
+   <materialref ref="Al"/> <solidref ref="OTA_tube_sol"/>
+ </volume>
+
+ <volume name = "FPA_log">
+   <materialref ref="Si"/> <solidref ref="FPA_sol"/>
+ </volume>
+
+ <volume name = "FPAS1_log">
+   <materialref ref="Al"/> <solidref ref="FPAS1_sol"/>
+ </volume>
+
+ <volume name = "coneshield_log">
+   <materialref ref="Al"/> <solidref ref="coneshield_sol"/>
+ </volume>
+
+ <volume name = "LENS_log">
+   <materialref ref="SiO2"/> <solidref ref="LENS_sol"/>
+ </volume>
+
+ <volume name="SA1_log">
+   <materialref ref="Si"/> <solidref ref="SA1_sol"/>
+ </volume>
+
+ <volume name="SA2_log">
+   <materialref ref="Si"/> <solidref ref="SA2_sol"/>
+ </volume>
+
+ <volume name="ELB_log">
+   <materialref ref="Al"/> <solidref ref="ELB_sol"/>
+ </volume>
+
+ <volume name="PCB_log">
+   <materialref ref="FR4"/> <solidref ref="PCB_sol"/>
+ </volume>
+
+ <volume name="FPGA_log">
+   <materialref ref="Si"/> <solidref ref="FPGA_sol"/>
+ </volume>
+
+ <volume name="FPGAS1_log">
+   <materialref ref="Al"/> <solidref ref="FPGAS1_sol"/>
+ </volume>
+
+ <volume name="FPGAS2_log">
+   <materialref ref="Al"/> <solidref ref="FPGAS2_sol"/>
+ </volume>
+
+ <volume name="World">
+
+  <materialref ref="Vacuum"/> <solidref ref="World_sol"/>
+ 
+  <physvol name="SCcase"> <volumeref ref="SC_tube_log"/>       <positionref ref="pos_centre"/>     <rotationref ref="rot_identity"/> </physvol>
+  <physvol name="OTAcase"> <volumeref ref="OTA_tube_log"/>     <positionref ref="OTA_Outer_Tube_Pos"/>     <rotationref ref="rot_identity"/> </physvol>
+  <physvol name="FPA"> <volumeref ref="FPA_log"/>              <positionref ref="FPA_Pos"/>     <rotationref ref="rot_identity"/> </physvol> 
+  <physvol name="LENS"> <volumeref ref="LENS_log"/>            <positionref ref="LENS_Pos"/>     <rotationref ref="rot_identity"/> </physvol> 
+  <physvol name="SA1"> <volumeref ref="SA1_log"/>              <positionref ref="SA_1_Pos"/>   <rotationref ref="rot_solararray"/> </physvol>
+  <physvol name="SA2"> <volumeref ref="SA2_log"/>              <positionref ref="SA_2_Pos"/>   <rotationref ref="rot_solararray"/> </physvol>
+  <physvol name="ELB"> <volumeref ref="ELB_log"/>              <positionref ref="ELB_Pos"/>     <rotationref ref="rot_identity"/> </physvol>
+  <physvol name="PCB"> <volumeref ref="PCB_log"/>              <positionref ref="PCB_Pos"/>     <rotationref ref="rot_PCB"/> </physvol> 
+  <physvol name="FPGA"> <volumeref ref="FPGA_log"/>            <positionref ref="FPGA_Pos"/>     <rotationref ref="rot_FPGA"/> </physvol>  
+  <physvol name="FPGAS1"> <volumeref ref="FPGAS1_log"/>            <positionref ref="FPGAS1_Pos"/>     <rotationref ref="rot_FPGAS1"/> </physvol>  
+  <physvol name="FPGAS2"> <volumeref ref="FPGAS2_log"/>            <positionref ref="FPGAS2_Pos"/>     <rotationref ref="rot_FPGAS2"/> </physvol>  
+  <physvol name="FPAS1"> <volumeref ref="FPAS1_log"/>              <positionref ref="FPAS1_Pos"/>     <rotationref ref="rot_identity"/> </physvol> 
+  <physvol name="CONESHIELD"> <volumeref ref="coneshield_log"/>              <positionref ref="FPACS_Pos"/>     <rotationref ref="rot_identity"/> </physvol> 
+
+ </volume>
+
+ </structure>
+
+ <setup name="World_PV" version="1.0"> <world ref="World"/> </setup>
+
+</gdml>

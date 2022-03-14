@@ -1,0 +1,70 @@
+#
+#Source definition
+#
+# =============================
+# SPENVIS particle source
+# Project: GEO10
+# title: GEO10
+# Particle: e-
+# Mission Segment:   1  3650.0 Days
+# =============================
+/gps/particle  e-
+/gps/ene/type Arb
+/gps/hist/type arb
+/gps/hist/point   4.000000E-02   2.319200E+09
+/gps/hist/point   1.000000E-01   3.602300E+08
+/gps/hist/point   2.000000E-01   5.920600E+07
+/gps/hist/point   3.000000E-01   2.037200E+07
+/gps/hist/point   4.000000E-01   9.416100E+06
+/gps/hist/point   5.000000E-01   4.427300E+06
+/gps/hist/point   6.000000E-01   2.400600E+06
+/gps/hist/point   7.000000E-01   1.491600E+06
+/gps/hist/point   8.000000E-01   9.956200E+05
+/gps/hist/point   1.000000E+00   5.018400E+05
+/gps/hist/point   1.250000E+00   2.498900E+05
+/gps/hist/point   1.500000E+00   1.377100E+05
+/gps/hist/point   1.750000E+00   7.692400E+04
+/gps/hist/point   2.000000E+00   4.653100E+04
+/gps/hist/point   2.250000E+00   2.802400E+04
+/gps/hist/point   2.500000E+00   1.773700E+04
+/gps/hist/point   2.750000E+00   1.153000E+04
+/gps/hist/point   3.000000E+00   7.796500E+03
+/gps/hist/point   3.250000E+00   5.082900E+03
+/gps/hist/point   3.500000E+00   3.330000E+03
+/gps/hist/point   3.750000E+00   2.248900E+03
+/gps/hist/point   4.000000E+00   1.554500E+03
+/gps/hist/point   4.250000E+00   1.077200E+03
+/gps/hist/point   4.500000E+00   7.628500E+02
+/gps/hist/point   4.750000E+00   5.507800E+02
+/gps/hist/point   5.000000E+00   4.046100E+02
+/gps/hist/inter  Lin
+/gps/ang/type cos
+/gps/ang/mintheta    0.000E+00 deg
+/gps/ang/maxtheta    9.000E+01 deg
+/gps/source/list 
+
+#
+#Normalisation
+#
+/control/alias  NORM_FACTOR_SPECTRUM "   2.658262E+16 "
+/control/alias  NORM_FACTOR_ANGULAR "   2.500000E-01 "
+
+#
+# NOTE:
+#
+# The section below should be copied to all Forward MC (FMC) macros
+# created in SPENVIS
+#
+# They include 
+# - the definition of the FMC source location
+# - the GRAS normalisation, using the SPENVIS alias as defined here above
+#
+
+/gps/pos/type Surface
+/gps/pos/shape Cylinder
+/gps/pos/radius {source_radius} mm
+/gps/pos/halfz  {source_halfz} mm
+#
+/gras/analysis/setNormalisationType FLUENCE
+/gras/analysis/setSourceFluence {NORM_FACTOR_SPECTRUM} cm-2
+#
